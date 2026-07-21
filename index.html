@@ -1357,7 +1357,13 @@ document.addEventListener('DOMContentLoaded', function() {
   if (typeof L === 'undefined') return;
 
   var map = L.map('hq-full-map', {
-    scrollWheelZoom: false
+    scrollWheelZoom: false,
+    dragging: false,         // Disables dragging/panning the map
+    zoomControl: false,      // Removes the +/- zoom buttons
+    doubleClickZoom: false,  // Disables zooming in on double-click
+    touchZoom: false,        // Disables pinch-to-zoom on mobile devices
+    boxZoom: false,          // Disables shift-drag box zoom
+    keyboard: false          // Disables keyboard map navigation
   });
 
   L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
