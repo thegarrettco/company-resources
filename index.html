@@ -886,6 +886,39 @@ body {
 .it-ticket-btn svg path { stroke: currentColor; }
 .it-ticket-btn:hover svg { transform: translateX(4px); }
 
+#it-support .it-grid,
+#it-support .it-escalate {
+  max-width: 95%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ── Additional IT Links: outline variant ─────────────────────────── */
+#it-links .link-btn {
+  background: transparent;
+  color: var(--ink);
+  border-color: rgba(0,78,130,0.22);
+  box-shadow: 0 1px 2px rgba(0,42,74,0.04);
+}
+#it-links .link-btn::before { display: none; }
+#it-links .link-btn:hover {
+  background: var(--blue-ghost);
+  border-color: var(--blue);
+  color: var(--blue-dark);
+  box-shadow: 0 8px 20px rgba(0,42,74,0.08);
+}
+#it-links .link-icon svg { opacity: 1; filter: none; }
+#it-links .link-icon svg path,
+#it-links .link-icon svg rect,
+#it-links .link-icon svg circle,
+#it-links .link-icon svg line,
+#it-links .link-btn:hover .link-icon svg path,
+#it-links .link-btn:hover .link-icon svg rect,
+#it-links .link-btn:hover .link-icon svg circle,
+#it-links .link-btn:hover .link-icon svg line {
+  stroke: var(--blue);
+}
+
 /* ═══════════════════════════════════════════════════════════════════
    WI-FI PASSWORDS
 ═══════════════════════════════════════════════════════════════════ */
@@ -1342,14 +1375,14 @@ Franklin, TN 37067</div>
      IT SUPPORT & RESOURCES   (two contacts)
 ════════════════════════════════════════════════════ -->
 <div class="section" id="it-support">
-  <div class="section-head">
+  <div class="section-head centered">
     <h2>
       IT Support &amp; Resources
       <svg class="head-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2" stroke-width="1.6"/><path d="M8 20h8M12 16v4" stroke-width="1.6" stroke-linecap="round"/></svg>
     </h2>
     <p class="section-sub">Your first point of contact for anything tech — from access requests to hardware.</p>
   </div>
-  <div class="divider"></div>
+   <div class="divider centered"></div>
 
   <div class="it-grid">
 
@@ -1366,7 +1399,7 @@ Franklin, TN 37067</div>
         </div>
       </div>
 
-      <p class="it-bio">Owns the platforms the company runs on — SharePoint, Procore, and much more. Reach out about system access, permissions, or how a business application should be set up.</p>
+      <p class="it-bio">Owns the business systems side — the applications the company runs on and the access that goes with them. Reach out about logins, permissions, or getting a new tool set up for your team.</p>
 
       <div class="it-lines">
         <a class="it-line" href="mailto:ANewman@TheGarrettCo.com">
@@ -1451,14 +1484,14 @@ Franklin, TN 37067</div>
      WI-FI PASSWORDS
 ════════════════════════════════════════════════════ -->
 <div class="section" id="wifi">
-  <div class="section-head">
+  <div class="section-head centered">
     <h2>
       Wi-Fi Passwords
       <svg class="head-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M2 8.5a15 15 0 0 1 20 0M5 12a10 10 0 0 1 14 0M8 15.5a5 5 0 0 1 8 0" stroke-width="1.6" stroke-linecap="round"/><circle cx="12" cy="19" r="1.3" fill="currentColor" stroke="none"/></svg>
     </h2>
     <p class="section-sub">Network credentials for our offices. Tap a copy button to grab the password.</p>
   </div>
-  <div class="divider"></div>
+  <div class="divider centered"></div>
 
   <div class="wifi-grid">
 
@@ -1585,6 +1618,19 @@ Franklin, TN 37067</div>
 </div>
 
 </div><!-- /page-wrap -->
+
+<script>
+/* ─── SECTION ORDER ─────────────────────────────────────────────── */
+(function () {
+  var wrap = document.querySelector('.page-wrap');
+  if (!wrap) return;
+  var order = ['quick-actions','team','travel','it-support','wifi','expense','it-links','mobile-apps'];
+  order.forEach(function (id) {
+    var el = document.getElementById(id);
+    if (el && el.parentNode === wrap) wrap.appendChild(el);
+  });
+})();
+</script>
 
 <!-- Leaflet JS Library -->
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
