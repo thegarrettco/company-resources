@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Company Resources</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,500&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <!-- Leaflet Map Stylesheet -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
@@ -108,98 +108,82 @@ body {
 }
 
 /* ═══════════════════════════════════════════════════════════════════
-   QUICK ACTION CARDS
+   FEATURE CTA CARDS  (top of page — Locker Room / Active Project List)
+   — matches the Marketing Request Form & Business Card Orders cards
 ═══════════════════════════════════════════════════════════════════ */
-
-.quick-grid {
+.cta-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: clamp(14px, 2vw, 26px);
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(16px, 2vw, 26px);
 }
-
-.quick-card {
+.cta-card {
   position: relative;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 6px;
-  padding: clamp(22px, 2.4vw, 34px) clamp(20px, 2.2vw, 32px) clamp(20px, 2.2vw, 30px);
-  background-color: #f3f2f2;
-  background-size: cover;
-  background-position: center;
-  border: 1.5px solid rgba(0,112,185,0.15);
-  border-radius: 14px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.05), 0 1px 4px rgba(0,112,185,0.07);
+  padding: clamp(26px, 3vw, 42px);
+  border-radius: 16px;
+  border: 1.5px solid rgba(0,112,185,0.16);
+  background: #f3f2f2;
+  box-shadow: 0 6px 22px rgba(0,0,0,0.05), 0 1px 4px rgba(0,112,185,0.07);
+  text-decoration: none;
+  color: inherit;
   transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
-  overflow: hidden;
+  min-height: 210px;
 }
-.quick-card::before {
+.cta-card::before {
   content: '';
-  position: absolute; left: 0; top: 0; bottom: 0;
-  width: 4px;
-  background: linear-gradient(to bottom, var(--blue), rgba(0,112,185,0.25));
+  position: absolute; inset: 0;
+  background: radial-gradient(120% 100% at 100% 0%, rgba(0,112,185,0.12), transparent 55%);
+  opacity: 0; transition: opacity var(--transition);
 }
-.quick-card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(0,112,185,0.32);
-  box-shadow: 0 16px 40px rgba(0,0,0,0.10), 0 4px 14px rgba(0,112,185,0.14);
+.cta-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(0,112,185,0.34);
+  box-shadow: 0 18px 44px rgba(0,0,0,0.10), 0 4px 14px rgba(0,112,185,0.14);
 }
-
-.quick-icon {
-  width: clamp(38px, 4vw, 52px);
-  height: clamp(38px, 4vw, 52px);
-  border-radius: 12px;
+.cta-card:hover::before { opacity: 1; }
+.cta-icon {
+  position: relative;
+  width: 56px; height: 56px;
+  border-radius: 14px;
   background: var(--blue-soft);
   display: flex; align-items: center; justify-content: center;
-  margin-bottom: 6px;
+  margin-bottom: 18px;
   transition: background var(--transition);
 }
-.quick-card:hover .quick-icon { background: var(--blue); }
-.quick-icon svg { width: 52%; height: 52%; }
-.quick-icon svg path, .quick-icon svg rect, .quick-icon svg circle, .quick-icon svg line { stroke: var(--blue); }
-.quick-card:hover .quick-icon svg path,
-.quick-card:hover .quick-icon svg rect,
-.quick-card:hover .quick-icon svg circle,
-.quick-card:hover .quick-icon svg line { stroke: #fff; }
-
-.quick-label {
-  font-size: clamp(15px, 1.5vw, 19px);
-  font-weight: 600;
+.cta-card:hover .cta-icon { background: var(--blue); }
+.cta-icon svg { width: 50%; height: 50%; }
+.cta-icon svg path, .cta-icon svg rect, .cta-icon svg circle, .cta-icon svg line { stroke: var(--blue); }
+.cta-card:hover .cta-icon svg path,
+.cta-card:hover .cta-icon svg rect,
+.cta-card:hover .cta-icon svg circle,
+.cta-card:hover .cta-icon svg line { stroke: #fff; }
+.cta-kicker {
+  position: relative;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--ink-light); margin-bottom: 6px;
+}
+.cta-title {
+  position: relative;
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(20px, 2.2vw, 28px);
+  font-weight: 700; color: var(--blue-dark); line-height: 1.15; margin-bottom: 8px;
+}
+.cta-desc {
+  position: relative;
+  font-size: clamp(11px, 1vw, 13.5px); font-weight: 300; color: var(--ink-light);
+  line-height: 1.6; max-width: 380px;
+}
+.cta-action {
+  position: relative;
+  margin-top: auto; padding-top: 20px;
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: clamp(11px, 1vw, 13px); font-weight: 600; letter-spacing: 0.04em;
   color: var(--blue);
-  line-height: 1.2;
 }
-.quick-sub {
-  font-size: clamp(11px, 1vw, 13px);
-  font-weight: 300;
-  color: var(--ink-light);
-  line-height: 1.55;
-  margin-bottom: clamp(14px, 1.6vw, 20px);
-}
-
-.quick-btn {
-  margin-top: auto;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 11px 20px;
-  font-family: 'Poppins', sans-serif;
-  font-size: clamp(11px, 1vw, 13px);
-  font-weight: 600;
-  letter-spacing: 0.03em;
-  color: #fff;
-  text-decoration: none;
-  background: var(--blue);
-  border-radius: 8px;
-  box-shadow: 0 4px 14px rgba(0,112,185,0.28);
-  transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
-}
-.quick-btn:hover {
-  background: var(--blue-dark);
-  transform: translateY(-1px);
-  box-shadow: 0 8px 20px rgba(0,112,185,0.34);
-}
-.quick-btn svg { width: 11px; height: 11px; transition: transform var(--transition); }
-.quick-btn:hover svg { transform: translateX(3px); }
+.cta-action svg { width: 12px; height: 12px; transition: transform var(--transition); }
+.cta-card:hover .cta-action svg { transform: translateX(4px); }
 
 /* ═══════════════════════════════════════════════════════════════════
    BUTTON GRID
@@ -328,6 +312,7 @@ body {
   background: linear-gradient(135deg, #dde8f4 0%, #eaf2fb 100%);
 }
 .avatar-placeholder svg { width: 46%; height: 46%; opacity: 0.30; }
+.avatar-placeholder svg path, .avatar-placeholder svg circle { stroke: var(--blue-dark); }
 
 .team-info-col {
   flex: 1;
@@ -616,92 +601,290 @@ body {
 .travel-card:hover .travel-cta svg { transform: translateX(3px); }
 
 /* ═══════════════════════════════════════════════════════════════════
-   IT SUPPORT
+   IT SUPPORT  — refined contact cards + dark help-desk bar
 ═══════════════════════════════════════════════════════════════════ */
 
-.it-feature {
-  display: flex;
-  flex-direction: row;
-  border-radius: 14px;
-  overflow: hidden;
-  border: 1.5px solid rgba(0,112,185,0.16);
-  background-color: #f3f2f2;
-  background-size: cover;
-  background-position: center;
-  box-shadow: 0 6px 24px rgba(0,0,0,0.06), 0 1px 4px rgba(0,112,185,0.08);
+.it-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(16px, 2vw, 26px);
 }
-.it-photo-col {
-  flex-shrink: 0;
-  width: clamp(150px, 22vw, 300px);
+
+/* ── Contact card ───────────────────────────────────────────────── */
+.it-card {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(24px, 2.6vw, 38px);
+  background: var(--white);
+  border: 1px solid rgba(0,78,130,0.13);
+  border-radius: 18px;
   overflow: hidden;
-  background: linear-gradient(160deg, #c8dff2 0%, #ddeef8 100%);
+  box-shadow: 0 1px 2px rgba(0,42,74,0.04), 0 10px 30px rgba(0,42,74,0.06);
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
 }
-.it-photo-col img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
+.it-card::before {
+  content: '';
+  position: absolute; top: 0; bottom: 0; left: 0;
+  width: 3px;
+  background: linear-gradient(180deg, var(--blue) 0%, rgba(0,112,185,0.55) 42%, rgba(0,112,185,0) 100%);
+}
+.it-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(0,112,185,0.28);
+  box-shadow: 0 2px 4px rgba(0,42,74,0.05), 0 22px 48px rgba(0,42,74,0.12);
+}
+
+/* ── Portrait + identity ────────────────────────────────────────── */
+.it-card-head {
+  display: flex;
+  align-items: center;
+  gap: clamp(14px, 1.6vw, 22px);
+  margin-bottom: clamp(16px, 1.8vw, 22px);
+}
+.it-portrait {
+  position: relative;
+  flex-shrink: 0;
+  width: clamp(84px, 8.5vw, 116px);
+  aspect-ratio: 1 / 1;
+  border-radius: 16px;
+  overflow: hidden;
+  background: linear-gradient(160deg, #dbe9f5 0%, #eef5fb 100%);
+  box-shadow: 0 6px 18px rgba(0,42,74,0.14);
+}
+.it-portrait::after {
+  content: '';
+  position: absolute; inset: 0;
+  border-radius: 16px;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.70), inset 0 0 0 2px rgba(0,112,185,0.16);
+  pointer-events: none;
+}
+.it-portrait img {
+  width: 100%; height: 100%;
   object-fit: cover;
   object-position: top center;
   display: block;
 }
-.it-photo-col::before {
-  content: '';
-  position: absolute; left: 0; top: 0; bottom: 0;
-  width: 4px;
-  background: linear-gradient(to bottom, var(--blue), rgba(0,112,185,0.2));
-  z-index: 2;
+.it-portrait.is-empty {
+  display: flex; align-items: center; justify-content: center;
 }
-.it-photo-col .avatar-placeholder svg { width: 40%; height: 40%; }
-.it-body {
-  flex: 1;
-  padding: clamp(20px, 2.6vw, 40px);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  min-width: 0;
-}
+.it-portrait.is-empty svg { width: 44%; height: 44%; opacity: 0.32; }
+.it-portrait.is-empty svg path, .it-portrait.is-empty svg circle { stroke: var(--blue-dark); }
+
+.it-identity { min-width: 0; }
 .it-name {
-  font-size: clamp(17px, 1.9vw, 24px);
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(19px, 2vw, 26px);
   font-weight: 700;
-  color: var(--blue);
-  line-height: 1.15;
-  margin-bottom: 4px;
+  color: var(--blue-dark);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  margin-bottom: 6px;
 }
 .it-role {
+  font-size: clamp(9.5px, 0.85vw, 11px);
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 12px;
+}
+.it-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: rgba(46,158,91,0.10);
+  font-size: 10.5px;
+  font-weight: 500;
+  color: #2b6b48;
+  letter-spacing: 0.02em;
+}
+.it-status {
+  transition: background var(--transition);
+}
+.it-status-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #2e9e5b;
+  box-shadow: 0 0 0 3px rgba(46,158,91,0.16);
+  flex-shrink: 0;
+}
+.it-card:hover .it-status { background: rgba(46,158,91,0.16); }
+.it-card:hover .it-status-dot { animation: statusPulse 1.9s ease-out infinite; }
+@keyframes statusPulse {
+  0%   { box-shadow: 0 0 0 0 rgba(46,158,91,0.50); }
+  70%  { box-shadow: 0 0 0 8px rgba(46,158,91,0); }
+  100% { box-shadow: 0 0 0 0 rgba(46,158,91,0); }
+}
+
+.it-bio {
+  font-size: clamp(11.5px, 1vw, 13.5px);
+  font-weight: 300;
+  color: #5a6472;
+  line-height: 1.75;
+  margin-bottom: clamp(16px, 1.8vw, 22px);
+}
+
+/* ── Contact rows (spec-sheet style) ────────────────────────────── */
+.it-lines {
+  margin-top: auto;
+  border-top: 1px solid var(--rule);
+}
+.it-line {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 0;
+  text-decoration: none;
+  color: inherit;
+}
+.it-line + .it-line { border-top: 1px solid var(--rule); }
+.it-line::before {
+  content: '';
+  position: absolute;
+  inset: 0 -12px;
+  border-radius: 10px;
+  background: transparent;
+  transition: background var(--transition), box-shadow var(--transition);
+}
+.it-line:hover::before { background: var(--blue-ghost); }
+.it-line:focus-visible { outline: none; }
+.it-line:focus-visible::before {
+  background: var(--blue-ghost);
+  box-shadow: 0 0 0 2px rgba(0,112,185,0.45);
+}
+.it-line-icon {
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+  width: 34px; height: 34px;
+  border-radius: 10px;
+  background: var(--blue-soft);
+  display: flex; align-items: center; justify-content: center;
+  transition: background var(--transition);
+}
+.it-line-icon svg { width: 16px; height: 16px; }
+.it-line-icon svg path,
+.it-line-icon svg rect,
+.it-line-icon svg circle { stroke: var(--blue); transition: stroke var(--transition); }
+.it-line:hover .it-line-icon,
+.it-line:focus-visible .it-line-icon { background: var(--blue); }
+.it-line:hover .it-line-icon svg path,
+.it-line:hover .it-line-icon svg rect,
+.it-line:hover .it-line-icon svg circle,
+.it-line:focus-visible .it-line-icon svg path,
+.it-line:focus-visible .it-line-icon svg rect,
+.it-line:focus-visible .it-line-icon svg circle { stroke: #fff; }
+
+.it-line-text {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.it-line-label {
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+}
+.it-line-value {
   font-size: clamp(11px, 1vw, 13px);
   font-weight: 500;
   color: var(--ink);
-  opacity: 0.8;
-  letter-spacing: 0.02em;
-  margin-bottom: 14px;
+  line-height: 1.35;
+  word-break: break-word;
+  transition: color var(--transition);
 }
-.it-desc {
-  font-size: clamp(12px, 1.05vw, 14px);
-  font-weight: 300;
-  color: #5a6472;
-  line-height: 1.7;
-  margin-bottom: 18px;
-  max-width: 620px;
+.it-line:hover .it-line-value { color: var(--blue-dark); }
+.it-line-arrow {
+  position: relative;
+  z-index: 1;
+  margin-left: auto;
+  flex-shrink: 0;
+  width: 12px; height: 12px;
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: opacity var(--transition), transform var(--transition);
 }
-.it-contact {
-  display: flex;
-  flex-wrap: wrap;
-  gap: clamp(10px, 1.4vw, 26px);
-  margin-bottom: 22px;
-}
-.it-contact-item {
+.it-line-arrow path { stroke: var(--blue); }
+.it-line:hover .it-line-arrow,
+.it-line:focus-visible .it-line-arrow { opacity: 1; transform: none; }
+
+/* ── Help-desk bar ──────────────────────────────────────────────── */
+.it-escalate {
+  position: relative;
+  overflow: hidden;
+  margin-top: clamp(18px, 2.2vw, 28px);
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: clamp(11px, 1vw, 13px);
-  color: var(--ink);
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: clamp(16px, 2vw, 30px);
+  padding: clamp(20px, 2.2vw, 32px) clamp(22px, 2.6vw, 40px);
+  border-radius: 18px;
+  background: linear-gradient(135deg, #0b2740 0%, #06182b 100%);
+  box-shadow: 0 14px 38px rgba(0,42,74,0.20);
 }
-.it-contact-item svg { width: 15px; height: 15px; flex-shrink: 0; opacity: 0.55; }
-.it-contact-item svg path, .it-contact-item svg rect, .it-contact-item svg circle { stroke: var(--blue); }
-.it-contact-item a { color: var(--ink); text-decoration: none; transition: color var(--transition); }
-.it-contact-item a:hover { color: var(--blue); }
+.it-escalate::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(80% 140% at 100% 0%, rgba(0,112,185,0.32), transparent 60%);
+  pointer-events: none;
+}
+.it-escalate-copy { position: relative; z-index: 1; min-width: 0; }
+.it-escalate-eyebrow {
+  display: block;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #6ebce9;
+  margin-bottom: 8px;
+}
+.it-escalate-text {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(15px, 1.6vw, 21px);
+  font-weight: 600;
+  color: #fff;
+  line-height: 1.35;
+  max-width: 620px;
+}
+.it-ticket-btn {
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 14px 26px;
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(11px, 1vw, 13px);
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: #06182b;
+  text-decoration: none;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.22);
+  transition: background var(--transition), color var(--transition),
+              transform var(--transition), box-shadow var(--transition);
+}
+.it-ticket-btn:hover {
+  background: var(--blue);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(0,112,185,0.40);
+}
+.it-ticket-btn svg { width: 12px; height: 12px; transition: transform var(--transition); }
+.it-ticket-btn svg path { stroke: currentColor; }
+.it-ticket-btn:hover svg { transform: translateX(4px); }
 
 /* ═══════════════════════════════════════════════════════════════════
    WI-FI PASSWORDS
@@ -805,18 +988,21 @@ body {
 
 /* ─── RESPONSIVE ───────────────────────────────────────────────────── */
 @media (max-width: 900px) {
-  .quick-grid      { grid-template-columns: 1fr; }
+  .cta-grid        { grid-template-columns: 1fr; }
   .links-grid      { grid-template-columns: repeat(2, 1fr); }
   .team-grid       { grid-template-columns: 1fr; }
   .locations-grid  { grid-template-columns: repeat(2, 1fr); }
   .travel-grid     { grid-template-columns: 1fr; }
   .wifi-grid       { grid-template-columns: 1fr; }
-  .it-feature      { flex-direction: column; }
-  .it-photo-col    { width: 100%; height: 220px; }
+  .it-grid         { grid-template-columns: 1fr; }
+  .it-escalate     { flex-direction: column; align-items: flex-start; }
 }
 @media (max-width: 520px) {
   .links-grid      { grid-template-columns: 1fr 1fr; }
   .locations-grid  { grid-template-columns: 1fr; }
+  .it-card-head    { flex-direction: column; align-items: flex-start; }
+  .it-portrait     { width: 96px; }
+  .it-ticket-btn   { width: 100%; justify-content: center; }
 }
 
 /* ─── SCROLL REVEAL ───────────────────────────────────────────────── */
@@ -824,6 +1010,8 @@ body {
 .js-reveal .section.in-view { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) {
   .js-reveal .section { opacity: 1 !important; transform: none !important; }
+  .it-card:hover { transform: none; }
+  .it-card:hover .it-status-dot { animation: none; }
 }
 </style>
 </head>
@@ -831,49 +1019,36 @@ body {
 <div class="page-wrap">
 
 <!-- ═══════════════════════════════════════════════════
-     QUICK ACTION CARDS
+     TOP CTAs — The Locker Room / Active Project List
 ════════════════════════════════════════════════════ -->
 <div class="section" id="quick-actions">
-  <div class="quick-grid">
+  <div class="cta-grid">
 
-    <!-- TECH ISSUES -->
-    <div class="quick-card">
-      <div class="quick-icon">
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.9 6.9a2.12 2.12 0 0 1-3-3l6.9-6.9a6 6 0 0 1 7.94-7.94l-3.76 3.77z" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <!-- THE LOCKER ROOM -->
+    <a class="cta-card" href="https://www.garrett-gear.com/Login?ReturnUrl=/Category" target="_blank" rel="noopener">
+      <div class="cta-icon">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M8 3l4 2 4-2 4 3-3 3v10a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1V9L4 6l4-3z" stroke-width="1.7" stroke-linejoin="round"/></svg>
       </div>
-      <div class="quick-label">Tech Issues</div>
-      <p class="quick-sub">Hardware, software, or access trouble? Log it and our IT team will jump on it.</p>
-      <a class="quick-btn" href="mailto:support@ciscom.com" target="_blank" rel="noopener">
-        Submit a Ticket
+      <div class="cta-kicker">Branded Store</div>
+      <div class="cta-title">The Locker Room</div>
+      <p class="cta-desc">Your team store for branded apparel, gear, and office essentials — gear up and represent Garrett.</p>
+      <span class="cta-action">Shop the Locker Room
         <svg viewBox="0 0 10 10" fill="none"><path d="M2 5h6M5.5 2.5L8 5l-2.5 2.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
-    </div>
+      </span>
+    </a>
 
-    <!-- GARRETT GEAR -->
-    <div class="quick-card">
-      <div class="quick-icon">
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20.38 3.46L16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H5v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V10h1.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z" stroke-width="1.8" stroke-linejoin="round"/></svg>
+    <!-- ACTIVE PROJECT LIST -->
+    <a class="cta-card" href="https://thegarrettco2.sharepoint.com/:x:/s/SharepointResources/IQAjqgibqwQ5SIp5-mVykhNGAVAQ84LISY7scfV_R2JLXIo?e=7giVWv" target="_blank" rel="noopener">
+      <div class="cta-icon">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2" stroke-width="1.7" stroke-linejoin="round"/><rect x="9" y="3" width="6" height="4" rx="1" stroke-width="1.7"/><path d="M8.5 13.5l2 2 4-4" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </div>
-      <div class="quick-label">Garrett Gear</div>
-      <p class="quick-sub">Branded apparel, swag, and office essentials — refresh your look.</p>
-      <a class="quick-btn" href="https://www.garrett-gear.com/Login?ReturnUrl=/Category" target="_blank" rel="noopener">
-        Shop the Store
+      <div class="cta-kicker">Portfolio Tracker</div>
+      <div class="cta-title">Active Project List</div>
+      <p class="cta-desc">An up-to-date view of everything in motion across the portfolio — locations, phases, and teams.</p>
+      <span class="cta-action">View TGC Active Projects
         <svg viewBox="0 0 10 10" fill="none"><path d="M2 5h6M5.5 2.5L8 5l-2.5 2.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
-    </div>
-
-    <!-- PROJECT LIST -->
-    <div class="quick-card">
-      <div class="quick-icon">
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2m-6 9l2 2 4-4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </div>
-      <div class="quick-label">Active Project List</div>
-      <p class="quick-sub">An up-to-date view of everything in motion across the portfolio.</p>
-      <a class="quick-btn" href="https://thegarrettco2.sharepoint.com/:x:/s/SharepointResources/IQAjqgibqwQ5SIp5-mVykhNGAVAQ84LISY7scfV_R2JLXIo?e=7giVWv" target="_blank" rel="noopener">
-        TGC Active Projects
-        <svg viewBox="0 0 10 10" fill="none"><path d="M2 5h6M5.5 2.5L8 5l-2.5 2.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
-    </div>
+      </span>
+    </a>
 
   </div>
 </div>
@@ -986,7 +1161,7 @@ Greenwood, IN 46143</div>
     <!-- LOCATION 2 -->
     <div class="location-card" data-location="1">
       <div class="location-map">
-        <img class="location-hq-img" src="https://static.wixstatic.com/media/4f7dd4_dc1923646c5743ed9d9b0d4bb738d31f~mv2.jpg" alt="Carmel HQ" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+        <img class="location-hq-img" src="https://static.wixstatic.com/media/4f7dd4_c194c0668f354699861dc8da2e48c25f~mv2.jpg" alt="Carmel HQ" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
         <div class="location-hq-placeholder" style="display:none;">
           <svg viewBox="0 0 24 24" fill="none"><path d="M3 21h18M5 21V7l8-4v18M13 10h5v11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
           <span>Carmel HQ Photo</span>
@@ -1026,7 +1201,7 @@ Denver, CO 80237</div>
     <!-- LOCATION 4 -->
     <div class="location-card" data-location="3">
       <div class="location-map">
-        <img class="location-hq-img" src="https://static.wixstatic.com/media/4f7dd4_75fc6676aca04c799baa5bc5427edf59~mv2.png" alt="Nashville HQ" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+        <img class="location-hq-img" src="https://static.wixstatic.com/media/4f7dd4_a4df785b4e4f4eeab1bfbc434898b0b2~mv2.jpeg" alt="Nashville HQ" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
         <div class="location-hq-placeholder" style="display:none;">
           <svg viewBox="0 0 24 24" fill="none"><path d="M3 21h18M5 21V7l8-4v18M13 10h5v11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
           <span>Nashville HQ Photo</span>
@@ -1054,53 +1229,7 @@ Franklin, TN 37067</div>
 
 
 <!-- ═══════════════════════════════════════════════════
-     EXPENSE REPORT
-════════════════════════════════════════════════════ -->
-<div class="section" id="expense">
-  <div class="section-head">
-    <h2>
-      Submitting an Expense Report
-      <svg class="head-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2" stroke-width="1.6"/><path d="M9 8h6M9 12h6M9 16h3" stroke-width="1.6" stroke-linecap="round"/></svg>
-    </h2>
-    <p class="section-sub">Submit, track, and manage reimbursements — plus the policies that govern them.</p>
-  </div>
-  <div class="divider"></div>
-
-  <div class="links-grid">
-    <a class="link-btn" href="https://thegarrettco2.sharepoint.com/:b:/s/SharepointResources/EYFKXhhxt4NAvMKWnjvq5nwBfrW1VmpW7UIJQQJnq_cZAg?e=VUqrAm" target="_blank" rel="noopener">
-      <span class="link-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke-width="1.7" stroke-linejoin="round"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8" stroke-width="1.7" stroke-linecap="round"/></svg></span>
-      <span class="link-label">Credit Card & Expense Policy</span>
-    </a>
-    <a class="link-btn" href="https://thegarrettco2.sharepoint.com/sites/SharepointResources/Onboarding%20%20Training/Forms/AllItems.aspx?id=%2Fsites%2FSharepointResources%2FOnboarding%20%20Training%2FPolicies%20%26%20Procedures%2F04%20Accounting%2F8%2E101%20Accounting%20%2D%20Corporate%20%2D%20SAP%20Concur%20Creating%20a%20New%20Expense%20Report%20for%20Desktop%2Epdf&parent=%2Fsites%2FSharepointResources%2FOnboarding%20%20Training%2FPolicies%20%26%20Procedures%2F04%20Accounting&p=true&ga=1&LOF=1" target="_blank" rel="noopener">
-      <span class="link-icon"><svg viewBox="0 0 24 24" fill="none"><rect x="2" y="3" width="20" height="14" rx="2" stroke-width="1.7" stroke-linejoin="round"/><path d="M8 21h8M12 17v4" stroke-width="1.7" stroke-linecap="round"/><path d="M7 8h10M7 11h6" stroke-width="1.7" stroke-linecap="round"/></svg></span>
-      <span class="link-label">How to Submit Reports on Concur</span>
-    </a>
-    <a class="link-btn" href="https://thegarrettco2.sharepoint.com/:w:/s/SharepointResources/EWSM1x_z9MZEl-FkPUaOu5wBDdyCBZBkD35vL5dTGNOjig?e=m1Cjrc" target="_blank" rel="noopener">
-      <span class="link-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke-width="1.7" stroke-linejoin="round"/><path d="M14 2v6h6M12 18v-6M9 15l3 3 3-3" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-      <span class="link-label">How to Submit Reports on Certify</span>
-    </a>
-    <a class="link-btn" href="https://thegarrettco2.sharepoint.com/:x:/s/SharepointResources/IQAjAvbAn1iOT4QzUVxVfhRKAUoApjXkaLH2N4r3SMvIvHk?e=o4saBf" target="_blank" rel="noopener">
-      <span class="link-icon"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" stroke-width="1.7"/><path d="M3 9h18M9 21V9" stroke-width="1.7" stroke-linecap="round"/></svg></span>
-      <span class="link-label">Expense Reimbursement Form</span>
-    </a>
-    <a class="link-btn" href="https://thegarrettco2.sharepoint.com/sites/SharepointResources/Onboarding%20%20Training/Forms/AllItems.aspx?id=/sites/SharepointResources/Onboarding%20%20Training/Policies%20%26%20Procedures/01%20Human%20Resources/_Resources/Credit%20Card%20Request%20Form.pdf&parent=/sites/SharepointResources/Onboarding%20%20Training/Policies%20%26%20Procedures/01%20Human%20Resources/_Resources&p=true&ct=1731352576860&or=Outlook-Body&cid=E9CB2C90-B723-40E1-B0BA-08283C5E35B9&ga=1&LOF=1" target="_blank" rel="noopener">
-      <span class="link-icon"><svg viewBox="0 0 24 24" fill="none"><rect x="1" y="4" width="22" height="16" rx="2" stroke-width="1.7"/><path d="M1 10h22" stroke-width="1.7"/><path d="M5 15h4" stroke-width="1.7" stroke-linecap="round"/></svg></span>
-      <span class="link-label">Credit Card Request Form</span>
-    </a>
-    <a class="link-btn" href="https://www.concursolutions.com/" target="_blank" rel="noopener">
-      <span class="link-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M13 12H3" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-      <span class="link-label">Concur Solutions Login</span>
-    </a>
-    <a class="link-btn" href="https://pro.emburse.app/" target="_blank" rel="noopener">
-      <span class="link-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M13 12H3" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-      <span class="link-label">Emburse Login</span>
-    </a>
-  </div>
-</div>
-
-
-<!-- ═══════════════════════════════════════════════════
-     TRAVELING SOON?
+     TRAVELING SOON?   (now sits ABOVE the expense section)
 ════════════════════════════════════════════════════ -->
 <div class="section" id="travel">
   <div class="section-head">
@@ -1164,7 +1293,53 @@ Franklin, TN 37067</div>
 
 
 <!-- ═══════════════════════════════════════════════════
-     IT SUPPORT & RESOURCES
+     EXPENSE REPORT   (now sits BELOW Traveling Soon)
+════════════════════════════════════════════════════ -->
+<div class="section" id="expense">
+  <div class="section-head">
+    <h2>
+      Submitting an Expense Report
+      <svg class="head-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2" stroke-width="1.6"/><path d="M9 8h6M9 12h6M9 16h3" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </h2>
+    <p class="section-sub">Submit, track, and manage reimbursements — plus the policies that govern them.</p>
+  </div>
+  <div class="divider"></div>
+
+  <div class="links-grid">
+    <a class="link-btn" href="https://thegarrettco2.sharepoint.com/:b:/s/SharepointResources/EYFKXhhxt4NAvMKWnjvq5nwBfrW1VmpW7UIJQQJnq_cZAg?e=VUqrAm" target="_blank" rel="noopener">
+      <span class="link-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke-width="1.7" stroke-linejoin="round"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8" stroke-width="1.7" stroke-linecap="round"/></svg></span>
+      <span class="link-label">Credit Card &amp; Expense Policy</span>
+    </a>
+    <a class="link-btn" href="https://thegarrettco2.sharepoint.com/sites/SharepointResources/Onboarding%20%20Training/Forms/AllItems.aspx?id=%2Fsites%2FSharepointResources%2FOnboarding%20%20Training%2FPolicies%20%26%20Procedures%2F04%20Accounting%2F8%2E101%20Accounting%20%2D%20Corporate%20%2D%20SAP%20Concur%20Creating%20a%20New%20Expense%20Report%20for%20Desktop%2Epdf&parent=%2Fsites%2FSharepointResources%2FOnboarding%20%20Training%2FPolicies%20%26%20Procedures%2F04%20Accounting&p=true&ga=1&LOF=1" target="_blank" rel="noopener">
+      <span class="link-icon"><svg viewBox="0 0 24 24" fill="none"><rect x="2" y="3" width="20" height="14" rx="2" stroke-width="1.7" stroke-linejoin="round"/><path d="M8 21h8M12 17v4" stroke-width="1.7" stroke-linecap="round"/><path d="M7 8h10M7 11h6" stroke-width="1.7" stroke-linecap="round"/></svg></span>
+      <span class="link-label">How to Submit Reports on Concur</span>
+    </a>
+    <a class="link-btn" href="https://thegarrettco2.sharepoint.com/:w:/s/SharepointResources/EWSM1x_z9MZEl-FkPUaOu5wBDdyCBZBkD35vL5dTGNOjig?e=m1Cjrc" target="_blank" rel="noopener">
+      <span class="link-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke-width="1.7" stroke-linejoin="round"/><path d="M14 2v6h6M12 18v-6M9 15l3 3 3-3" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <span class="link-label">How to Submit Reports on Certify</span>
+    </a>
+    <a class="link-btn" href="https://thegarrettco2.sharepoint.com/:x:/s/SharepointResources/IQAjAvbAn1iOT4QzUVxVfhRKAUoApjXkaLH2N4r3SMvIvHk?e=o4saBf" target="_blank" rel="noopener">
+      <span class="link-icon"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" stroke-width="1.7"/><path d="M3 9h18M9 21V9" stroke-width="1.7" stroke-linecap="round"/></svg></span>
+      <span class="link-label">Expense Reimbursement Form</span>
+    </a>
+    <a class="link-btn" href="https://thegarrettco2.sharepoint.com/sites/SharepointResources/Onboarding%20%20Training/Forms/AllItems.aspx?id=/sites/SharepointResources/Onboarding%20%20Training/Policies%20%26%20Procedures/01%20Human%20Resources/_Resources/Credit%20Card%20Request%20Form.pdf&parent=/sites/SharepointResources/Onboarding%20%20Training/Policies%20%26%20Procedures/01%20Human%20Resources/_Resources&p=true&ct=1731352576860&or=Outlook-Body&cid=E9CB2C90-B723-40E1-B0BA-08283C5E35B9&ga=1&LOF=1" target="_blank" rel="noopener">
+      <span class="link-icon"><svg viewBox="0 0 24 24" fill="none"><rect x="1" y="4" width="22" height="16" rx="2" stroke-width="1.7"/><path d="M1 10h22" stroke-width="1.7"/><path d="M5 15h4" stroke-width="1.7" stroke-linecap="round"/></svg></span>
+      <span class="link-label">Credit Card Request Form</span>
+    </a>
+    <a class="link-btn" href="https://www.concursolutions.com/" target="_blank" rel="noopener">
+      <span class="link-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M13 12H3" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <span class="link-label">Concur Solutions Login</span>
+    </a>
+    <a class="link-btn" href="https://pro.emburse.app/" target="_blank" rel="noopener">
+      <span class="link-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M13 12H3" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <span class="link-label">Emburse Login</span>
+    </a>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     IT SUPPORT & RESOURCES   (two contacts)
 ════════════════════════════════════════════════════ -->
 <div class="section" id="it-support">
   <div class="section-head">
@@ -1176,33 +1351,98 @@ Franklin, TN 37067</div>
   </div>
   <div class="divider"></div>
 
-  <div class="it-feature">
-    <div class="it-photo-col">
-      <img src="https://static.wixstatic.com/media/4f7dd4_e0d1bfec29ee4a9d9c9a14b6a00045cd~mv2.png">
-    </div>
-    <div class="it-body">
-      <div class="it-name">Adam Newman</div>
-      <div class="it-role">Director of IT Business Systems</div>
-      <p class="it-desc">Need help with your laptop, logins, email, or software access? Reach out directly, or open a ticket! Adam and the Ciscom team will get back to you as soon as possible! For urgent, business-stopping issues, call the support line below.</p>
-      <div class="it-contact">
-        <div class="it-contact-item">
-          <svg viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="14" height="10" rx="2" stroke-width="1.5"/><path d="M1 5l7 5 7-5" stroke-width="1.5" stroke-linecap="round"/></svg>
-          <a href="mailto:ANewman@TheGarrettCo.com">ANewman@TheGarrettCo.com</a>
+  <div class="it-grid">
+
+    <!-- IT CONTACT 1 -->
+    <article class="it-card">
+      <div class="it-card-head">
+        <div class="it-portrait">
+          <img src="https://static.wixstatic.com/media/4f7dd4_e0d1bfec29ee4a9d9c9a14b6a00045cd~mv2.png" alt="Adam Newman">
         </div>
-        <div class="it-contact-item">
-          <svg viewBox="0 0 16 16" fill="none"><path d="M3 3h3l1.5 4-2 1.5a9 9 0 0 0 4 4l1.5-2 4 1.5v3a1 1 0 0 1-1 1A12 12 0 0 1 2 4a1 1 0 0 1 1-1z" stroke-width="1.4" stroke-linejoin="round"/></svg>
-          <a href="tel:+8126034778">(812) 603-4778</a>
-        </div>
-        <div class="it-contact-item">
-          <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke-width="1.4"/><path d="M8 4.5V8l2.5 1.5" stroke-width="1.4" stroke-linecap="round"/></svg>
-          <span>Mon–Fri, 9am–5pm ET</span>
+        <div class="it-identity">
+          <h3 class="it-name">Adam Newman</h3>
+          <p class="it-role">Director of IT Business Systems</p>
+          <span class="it-status"><span class="it-status-dot"></span>Mon–Fri, 9am–5pm ET</span>
         </div>
       </div>
-      <a class="quick-btn" href="mailto:support@ciscom.com" target="_blank" rel="noopener">
-        Submit a Ticket
-        <svg viewBox="0 0 10 10" fill="none"><path d="M2 5h6M5.5 2.5L8 5l-2.5 2.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
+
+      <p class="it-bio">Owns the platforms the company runs on — SharePoint, Procore, and much more. Reach out about system access, permissions, or how a business application should be set up.</p>
+
+      <div class="it-lines">
+        <a class="it-line" href="mailto:ANewman@TheGarrettCo.com">
+          <span class="it-line-icon">
+            <svg viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="14" height="10" rx="2" stroke-width="1.5"/><path d="M1 5l7 5 7-5" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </span>
+          <span class="it-line-text">
+            <span class="it-line-label">Email</span>
+            <span class="it-line-value">ANewman@TheGarrettCo.com</span>
+          </span>
+          <svg class="it-line-arrow" viewBox="0 0 10 10" fill="none"><path d="M2 5h6M5.5 2.5L8 5l-2.5 2.5" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a class="it-line" href="tel:+18126034778">
+          <span class="it-line-icon">
+            <svg viewBox="1 2 15 15" fill="none"><path d="M3 3h3l1.5 4-2 1.5a9 9 0 0 0 4 4l1.5-2 4 1.5v3a1 1 0 0 1-1 1A12 12 0 0 1 2 4a1 1 0 0 1 1-1z" stroke-width="1.4" stroke-linejoin="round"/></svg>
+          </span>
+          <span class="it-line-text">
+            <span class="it-line-label">Direct Line</span>
+            <span class="it-line-value">(812) 603-4778</span>
+          </span>
+          <svg class="it-line-arrow" viewBox="0 0 10 10" fill="none"><path d="M2 5h6M5.5 2.5L8 5l-2.5 2.5" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- IT CONTACT 2 -->
+    <article class="it-card">
+      <div class="it-card-head">
+        <div class="it-portrait">
+          <img src="https://static.wixstatic.com/media/4f7dd4_07f757af427e4370b70f4ea0a8adcbf6~mv2.png" alt="Nick Thurman">
+        </div>
+        <div class="it-identity">
+          <h3 class="it-name">Nick Thurman</h3>
+          <p class="it-role">Technology Manager</p>
+          <span class="it-status"><span class="it-status-dot"></span>Mon–Fri, 9am–5pm ET</span>
+        </div>
+      </div>
+
+      <p class="it-bio">Handles the hardware side — laptops, phones, network, and conference room tech across all four offices. Reach out for new equipment, setup help, or anything that isn't working the way it should.</p>
+
+      <div class="it-lines">
+        <a class="it-line" href="mailto:NThurman@TheGarrettCo.com">
+          <span class="it-line-icon">
+            <svg viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="14" height="10" rx="2" stroke-width="1.5"/><path d="M1 5l7 5 7-5" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </span>
+          <span class="it-line-text">
+            <span class="it-line-label">Email</span>
+            <span class="it-line-value">ANewman@TheGarrettCo.com</span>
+          </span>
+          <svg class="it-line-arrow" viewBox="0 0 10 10" fill="none"><path d="M2 5h6M5.5 2.5L8 5l-2.5 2.5" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a class="it-line" href="tel:+18126034778">
+          <span class="it-line-icon">
+            <svg viewBox="1 2 15 15" fill="none"><path d="M3 3h3l1.5 4-2 1.5a9 9 0 0 0 4 4l1.5-2 4 1.5v3a1 1 0 0 1-1 1A12 12 0 0 1 2 4a1 1 0 0 1 1-1z" stroke-width="1.4" stroke-linejoin="round"/></svg>
+          </span>
+          <span class="it-line-text">
+            <span class="it-line-label">Direct Line</span>
+            <span class="it-line-value">(317) 515-7244</span>
+          </span>
+          <svg class="it-line-arrow" viewBox="0 0 10 10" fill="none"><path d="M2 5h6M5.5 2.5L8 5l-2.5 2.5" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </article>
+
+  </div>
+
+  <!-- HELP DESK BAR -->
+  <div class="it-escalate">
+    <div class="it-escalate-copy">
+      <span class="it-escalate-eyebrow">Ciscom Help Desk</span>
+      <p class="it-escalate-text">Business-stopping issue, or not sure who to ask? Open a ticket and the team will pick it up.</p>
     </div>
+    <a class="it-ticket-btn" href="mailto:support@ciscom.com" target="_blank" rel="noopener">
+      Submit a Ticket
+      <svg viewBox="0 0 10 10" fill="none"><path d="M2 5h6M5.5 2.5L8 5l-2.5 2.5" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
   </div>
 </div>
 
@@ -1262,7 +1502,7 @@ Franklin, TN 37067</div>
         <span class="wifi-signal"><svg viewBox="0 0 24 24" fill="none"><path d="M2 8.5a15 15 0 0 1 20 0M5 12a10 10 0 0 1 14 0M8 15.5a5 5 0 0 1 8 0" stroke-width="1.7" stroke-linecap="round"/></svg></span>
         <div class="wifi-head-text">
           <div class="wifi-net">Mobile</div>
-          <div class="wifi-tag">Staff & Devices</div>
+          <div class="wifi-tag">Staff &amp; Devices</div>
         </div>
       </div>
       <div class="wifi-row"><span class="wifi-key">Network</span><span class="wifi-val">Garrettmobile</span></div>
@@ -1389,7 +1629,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     var marker = L.marker([hq.lat, hq.lng], { icon: customIcon }).addTo(map);
-markers.push(marker);
+    markers.push(marker);
     bounds.extend([hq.lat, hq.lng]);
   });
 
@@ -1401,14 +1641,14 @@ markers.push(marker);
     if (idx === null) return;
 
     card.addEventListener('mouseenter', function() {
-  var pinEl = document.getElementById('pin-' + idx);
-  if (pinEl) pinEl.classList.add('pin-glow');
-});
+      var pinEl = document.getElementById('pin-' + idx);
+      if (pinEl) pinEl.classList.add('pin-glow');
+    });
 
-card.addEventListener('mouseleave', function() {
-  var pinEl = document.getElementById('pin-' + idx);
-  if (pinEl) pinEl.classList.remove('pin-glow');
-});
+    card.addEventListener('mouseleave', function() {
+      var pinEl = document.getElementById('pin-' + idx);
+      if (pinEl) pinEl.classList.remove('pin-glow');
+    });
   });
 });
 
