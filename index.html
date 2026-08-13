@@ -113,8 +113,7 @@ body {
 }
 
 /* ═══════════════════════════════════════════════════════════════════
-   FEATURE CTA CARDS  (top of page — Locker Room / Active Project List)
-   — matches the Marketing Request Form & Business Card Orders cards
+   FEATURE CTA CARDS  (top of page — Org Chart / Active Project List)
 ═══════════════════════════════════════════════════════════════════ */
 .cta-grid {
   display: grid;
@@ -1025,6 +1024,96 @@ body {
 .wifi-copy svg path, .wifi-copy svg rect { stroke: currentColor; }
 .wifi-copy.copied { background: #2e9e5b; color: #fff; }
 
+/* ═══════════════════════════════════════════════════════════════════
+   FEATURE BAND  (The Locker Room)
+   — same structure as the Org Chart band on HR, but the left panel
+     holds a still image instead of a video, so there are no controls.
+═══════════════════════════════════════════════════════════════════ */
+.org-band {
+  display: flex;
+  flex-direction: row;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1.5px solid rgba(0,112,185,0.16);
+  box-shadow: 0 8px 30px rgba(0,42,74,0.08), 0 1px 4px rgba(0,112,185,0.08);
+}
+.org-visual {
+  position: relative;
+  flex-shrink: 0;
+  width: clamp(220px, 34vw, 440px);
+  overflow: hidden;
+  background: linear-gradient(160deg, #0b2740 0%, #0070b9 100%);
+}
+.org-visual img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+/* Line-art fallback sitting behind the photo — shows if the image is
+   missing or the URL breaks, so the panel never looks empty */
+.org-fallback {
+  position: absolute; inset: 0;
+  z-index: 0;
+  display: flex; align-items: center; justify-content: center;
+  padding: clamp(24px, 3vw, 44px);
+}
+.org-fallback svg { width: 100%; height: auto; max-width: 260px; }
+.org-fallback svg rect, .org-fallback svg path, .org-fallback svg circle { stroke: rgba(255,255,255,0.72); }
+.org-fallback .node-fill { fill: rgba(255,255,255,0.10); }
+
+.org-body {
+  flex: 1;
+  padding: clamp(24px, 3vw, 48px);
+  display: flex; flex-direction: column; justify-content: center;
+  background: #f7fafd;
+  min-width: 0;
+}
+.org-kicker {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--blue); margin-bottom: 12px;
+}
+.org-title {
+  font-family: var(--font-head);
+  font-size: clamp(21px, 2.5vw, 33px);
+  font-weight: 700; color: var(--blue-dark); line-height: 1.18; letter-spacing: -0.02em; margin-bottom: 14px;
+}
+.org-copy {
+  font-size: clamp(12px, 1.05vw, 14.5px); font-weight: 300; color: #5a6472;
+  line-height: 1.75; margin-bottom: 24px; max-width: 660px;
+}
+.org-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+.btn-solid, .btn-ghost {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 13px 24px;
+  font-family: var(--font-body);
+  font-size: clamp(11px, 1vw, 13px); font-weight: 600; letter-spacing: 0.03em;
+  border-radius: 9px; text-decoration: none; cursor: pointer;
+  transition: all var(--transition);
+}
+.btn-solid {
+  color: #fff; background: var(--blue); border: 1.5px solid var(--blue);
+  box-shadow: 0 6px 18px rgba(0,112,185,0.28);
+}
+.btn-solid:hover { background: var(--blue-dark); border-color: var(--blue-dark); transform: translateY(-2px); box-shadow: 0 10px 24px rgba(0,112,185,0.34); }
+.btn-ghost {
+  color: var(--blue); background: transparent; border: 1.5px solid rgba(0,112,185,0.35);
+}
+.btn-ghost:hover { background: var(--blue-soft); border-color: var(--blue); transform: translateY(-2px); }
+.btn-solid svg, .btn-ghost svg { width: 12px; height: 12px; }
+.btn-solid svg path { stroke: #fff; }
+.btn-ghost svg path { stroke: var(--blue); }
+
+/* Meta chips — matches the Playbook broadcast tags */
+.ba-meta { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 24px; }
+.ba-tag {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 8px 14px; border-radius: 999px;
+  font-size: 12px; font-weight: 500; color: var(--ink);
+  background: var(--blue-soft);
+}
+.ba-tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--blue); }
+
 /* ─── RESPONSIVE ───────────────────────────────────────────────────── */
 @media (max-width: 900px) {
   .cta-grid        { grid-template-columns: 1fr; }
@@ -1035,9 +1124,11 @@ body {
   .wifi-grid       { grid-template-columns: 1fr; }
   .it-grid         { grid-template-columns: 1fr; }
   .it-escalate     { flex-direction: column; align-items: flex-start; }
+  .org-band        { flex-direction: column; }
+  .org-visual      { width: 100%; height: 240px; }
 }
 @media (max-width: 520px) {
-  .links-grid      { grid-template-columns: 1fr 1fr; }
+  .links-grid      { grid-template-columns: 1fr; }
   .locations-grid  { grid-template-columns: 1fr; }
   .it-card-head    { flex-direction: column; align-items: flex-start; }
   .it-portrait     { width: 96px; }
@@ -1058,20 +1149,20 @@ body {
 <div class="page-wrap">
 
 <!-- ═══════════════════════════════════════════════════
-     TOP CTAs — The Locker Room / Active Project List
+     TOP CTAs — Org Chart / Active Project List
 ════════════════════════════════════════════════════ -->
 <div class="section" id="quick-actions">
   <div class="cta-grid">
 
-    <!-- THE LOCKER ROOM -->
-    <a class="cta-card" href="https://www.garrett-gear.com/Login?ReturnUrl=/Category" target="_blank" rel="noopener">
+    <!-- ORG CHART  (icon matches the Our Team section on the HR page) -->
+    <a class="cta-card" href="https://thegarrettco2.sharepoint.com/:b:/s/SharepointResources/IQD31QqV0TJ0Rrs94eSNJyheAXpiQbe8hbelUhAC0JV4Xw8?e=0VdAUR" target="_blank" rel="noopener">
       <div class="cta-icon">
-        <svg viewBox="0 0 24 24" fill="none"><path d="M8 3l4 2 4-2 4 3-3 3v10a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1V9L4 6l4-3z" stroke-width="1.7" stroke-linejoin="round"/></svg>
+        <svg viewBox="0 0 24 24" fill="none"><rect x="9" y="3" width="6" height="4" rx="1" stroke-width="1.7"/><rect x="3" y="17" width="6" height="4" rx="1" stroke-width="1.7"/><rect x="15" y="17" width="6" height="4" rx="1" stroke-width="1.7"/><path d="M12 7v5M6 17v-3h12v3" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </div>
-      <div class="cta-kicker">Branded Store</div>
-      <div class="cta-title">The Locker Room</div>
-      <p class="cta-desc">Your team store for branded apparel, gear, and office essentials — gear up and represent Garrett.</p>
-      <span class="cta-action">Shop the Locker Room
+      <div class="cta-kicker">Who's Who</div>
+      <div class="cta-title">Organizational Chart</div>
+      <p class="cta-desc">See how the company fits together — every department, leader, and reporting line, kept current as the team grows.</p>
+      <span class="cta-action">View the Org Chart
         <svg viewBox="0 0 10 10" fill="none"><path d="M2 5h6M5.5 2.5L8 5l-2.5 2.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </span>
     </a>
@@ -1268,7 +1359,7 @@ Franklin, TN 37067</div>
 
 
 <!-- ═══════════════════════════════════════════════════
-     TRAVELING SOON?   (now sits ABOVE the expense section)
+     TRAVELING SOON?
 ════════════════════════════════════════════════════ -->
 <div class="section" id="travel">
   <div class="section-head">
@@ -1332,7 +1423,7 @@ Franklin, TN 37067</div>
 
 
 <!-- ═══════════════════════════════════════════════════
-     EXPENSE REPORT   (now sits BELOW Traveling Soon)
+     EXPENSE REPORT
 ════════════════════════════════════════════════════ -->
 <div class="section" id="expense">
   <div class="section-head">
@@ -1378,7 +1469,7 @@ Franklin, TN 37067</div>
 
 
 <!-- ═══════════════════════════════════════════════════
-     IT SUPPORT & RESOURCES   (two contacts)
+     IT SUPPORT & RESOURCES
 ════════════════════════════════════════════════════ -->
 <div class="section" id="it-support">
   <div class="section-head centered">
@@ -1557,6 +1648,62 @@ Franklin, TN 37067</div>
 
 
 <!-- ═══════════════════════════════════════════════════
+     THE LOCKER ROOM  (feature band — photo, not video)
+     ▼ Paste your Locker Room photo URL into the img src below.
+       If the src is empty or broken, the line-art fallback behind it
+       shows instead, so the panel never renders blank. ▼
+════════════════════════════════════════════════════ -->
+<div class="section" id="locker-room">
+  <div class="section-head">
+    <h2>
+      The Locker Room
+      <svg class="head-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 3l4 2 4-2 4 3-3 3v10a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1V9L4 6l4-3z" stroke-width="1.6" stroke-linejoin="round"/></svg>
+    </h2>
+    <p class="section-sub">Company apparel, gear, and office essentials — everything you need to represent Garrett well.</p>
+  </div>
+  <div class="divider"></div>
+
+  <div class="org-band">
+    <div class="org-visual">
+      <!-- ▼▼▼ LOCKER ROOM PHOTO — paste the image URL in src below ▼▼▼ -->
+      <img src="https://static.wixstatic.com/media/4f7dd4_b4c99e71adf24c8a985424eebfae58fd~mv2.jpg"
+           alt="Garrett branded apparel and gear"
+           onerror="this.style.display='none';">
+
+      <!-- Line-art fallback behind the photo -->
+      <div class="org-fallback" aria-hidden="true">
+        <svg viewBox="0 0 300 200" fill="none">
+          <path class="node-fill" d="M112 44l38 18 38-18 44 30-28 28v52a8 8 0 0 1-8 8h-92a8 8 0 0 1-8-8v-52L68 74l44-30z" stroke-width="1.8" stroke-linejoin="round"/>
+          <path d="M112 44c0 18 17 30 38 30s38-12 38-30" stroke-width="1.8" stroke-linejoin="round"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="org-body">
+      <div class="org-kicker">Branded Store</div>
+      <h3 class="org-title">Gear up and represent Garrett</h3>
+      <p class="org-copy">The Locker Room is our company store — polos, outerwear, hats, job-site gear, and office essentials, all branded and ready to order. Whether you're heading to a site visit, a client meeting, or the annual meeting, you'll find something that fits the occasion. New items are added throughout the year, so it's worth checking back.</p>
+      <div class="ba-meta">
+        <span class="ba-tag">Apparel &amp; outerwear</span>
+        <span class="ba-tag">Job-site gear</span>
+        <span class="ba-tag">Office essentials</span>
+      </div>
+      <div class="org-actions">
+        <a class="btn-solid" href="https://garrett-gear.liftoff.shop/" target="_blank" rel="noopener">
+          Shop the Locker Room
+          <svg viewBox="0 0 10 10" fill="none"><path d="M2 5h6M5.5 2.5L8 5l-2.5 2.5" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a class="btn-ghost" href="mailto:SLindsey@TheGarrettCo.com">
+          Questions? Ask The Marketing Team
+          <svg viewBox="0 0 10 10" fill="none"><path d="M2 5h6M5.5 2.5L8 5l-2.5 2.5" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
      ADDITIONAL IT LINKS
 ════════════════════════════════════════════════════ -->
 <div class="section" id="it-links">
@@ -1630,7 +1777,7 @@ Franklin, TN 37067</div>
 (function () {
   var wrap = document.querySelector('.page-wrap');
   if (!wrap) return;
-  var order = ['quick-actions','team','travel','it-support','wifi','expense','it-links','mobile-apps'];
+  var order = ['quick-actions','team','travel','it-support','wifi','locker-room','expense','it-links','mobile-apps'];
   order.forEach(function (id) {
     var el = document.getElementById(id);
     if (el && el.parentNode === wrap) wrap.appendChild(el);
